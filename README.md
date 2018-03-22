@@ -5,5 +5,9 @@
 2. If the image you want to classify is in on the internet
   
     `python classify.py --image_url http://something.jpg`
+    
 Install [Tensor flow](https://www.tensorflow.org/install/)
+
 Install [Keras](https://keras.io/#installation)
+
+Used [ImageNet ILSVRC](http://www.image-net.org/challenges/LSVRC/)
