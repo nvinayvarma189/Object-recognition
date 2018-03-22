@@ -11,3 +11,9 @@ Install [Tensor flow](https://www.tensorflow.org/install/)
 Install [Keras](https://keras.io/#installation)
 
 Used [ImageNet ILSVRC](http://www.image-net.org/challenges/LSVRC/)
+
+Other options are:
+
+1.[COCO](http://mscoco.org/dataset/#detections-challenge2016)
+
+2.[PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/)
