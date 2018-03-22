@@ -14,21 +14,20 @@ target_size = (224, 224)
 
 def predict(model, img, target_size, top_n=3):
   """Run model prediction on image
-  Args:
-    model: keras model
+  Arguments:
+    model: keras model which we import
     img: PIL format image
-    target_size: (w,h) tuple
-    top_n: # of top predictions to return
+    target_size: (width,height) as a tuple
+    top_n: number of top predictions to return
   Returns:
     list of predicted labels and their probabilities
   """
   if img.size != target_size:
-    img = img.resize(target_size)
-
-  x = image.img_to_array(img)
-  x = np.expand_dims(x, axis=0)
-  x = preprocess_input(x)
-  preds = model.predict(x)
+    img = img.resize(target_size) #We need this so as to adjust to the fixed size of the CNN architecture we are using
+  x = image.img_to_array(img)     #converts image into a numpy array
+  x = np.expand_dims(x, axis=0)   #Expand dimension to 4 arguments. We initially have three. The model we are using needs 4.
+  x = preprocess_input(x)     #Data Normalization
+  preds = model.predict(x)   #Prediction happens
   return decode_predictions(preds, top=top_n)[0]
 
 def plot_preds(image, preds):
