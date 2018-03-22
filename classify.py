@@ -23,22 +23,22 @@ def predict(model, img, target_size, top_n=3):
     list of predicted labels and their probabilities
   """
   if img.size != target_size:
-    img = img.resize(target_size) #We need this so as to adjust to the fixed size of the CNN architecture we are using
-  x = image.img_to_array(img)     #converts image into a numpy array
+    img = img.resize(target_size) #We need this so as to adjust to the fixed size of the CNN architecture we are using.
+  x = image.img_to_array(img)     #Converts image into a numpy array.
   x = np.expand_dims(x, axis=0)   #Expand dimension to 4 arguments. We initially have three. The model we are using needs 4.
-  x = preprocess_input(x)     #Data Normalization
-  preds = model.predict(x)   #Prediction happens
+  x = preprocess_input(x)     #Data Normalization.
+  preds = model.predict(x)   #Prediction happens.
   return decode_predictions(preds, top=top_n)[0]
 
 def plot_preds(image, preds):
   """Displays image and the top-n predicted probabilities in a bar graph
-  Args:
+  Arguments:
     image: PIL image
     preds: list of predicted labels and their probabilities
   """
-  plt.imshow(image)
+  plt.imshow(image) #showing the image.
   plt.axis('off')
-
+"""The following code is to set up your graph. Yiu can resize it or scale it like you want."""
   plt.figure()
   order = list(reversed(range(len(preds))))
   bar_preds = [pr[2] for pr in preds]
@@ -56,16 +56,16 @@ if __name__=="__main__":
   a.add_argument("--image_url", help="url to image")
   args = a.parse_args()
 
-  if args.image is None and args.image_url is None:
+  if args.image is None and args.image_url is None: #if it doesn't exist.
     a.print_help()
     sys.exit(1)
 
-  if args.image is not None:
+  if args.image is not None: #If the image we want to test is within your the local machine.
     img = Image.open(args.image)
     preds = predict(model, img, target_size)
     plot_preds(img, preds)
 
-  if args.image_url is not None:
+  if args.image_url is not None: #If the image we want to test is on the internet.
     response = requests.get(args.image_url)
     img = Image.open(BytesIO(response.content))
     preds = predict(model, img, target_size)
