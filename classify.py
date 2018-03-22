@@ -6,8 +6,9 @@ import requests
 from io import BytesIO
 import matplotlib.pyplot as plt
 
-from keras.preprocessing import image
-from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+from keras.preprocessing import image #module
+"""Load ResNet50 model using weights that have been trained on the ImageNet ILSVRC competition."""
+from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions 
 
 model = ResNet50(weights='imagenet')
 target_size = (224, 224)
@@ -38,7 +39,7 @@ def plot_preds(image, preds):
   """
   plt.imshow(image) #showing the image.
   plt.axis('off')
-"""The following code is to set up your graph. Yiu can resize it or scale it like you want."""
+"""The following code is to set up your graph. You can resize it or scale it like you want."""
   plt.figure()
   order = list(reversed(range(len(preds))))
   bar_preds = [pr[2] for pr in preds]
